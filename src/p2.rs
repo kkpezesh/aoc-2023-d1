@@ -52,7 +52,7 @@ fn get_calibration_value(text: &str) -> Option<u32> {
         if let Some(digit) = ch.to_digit(10) {
             left_cal_digit = Some(digit);
             break;
-        } else if let Some(digit) = text_to_digit(index, text) {
+        } else if let Some(digit) = text_to_digit(index, &text) {
             left_cal_digit = Some(digit);
             break;
         }
@@ -68,7 +68,7 @@ fn get_calibration_value(text: &str) -> Option<u32> {
         if let Some(digit) = ch.to_digit(10) {
             right_cal_digit = digit;
             break;
-        } else if let Some(digit) = text_to_digit(index, text) {
+        } else if let Some(digit) = text_to_digit(index, &text) {
             right_cal_digit = digit;
             break;
         }
@@ -82,7 +82,7 @@ fn text_to_digit(index: usize, text: &str) -> Option<u32> {
     for text_digit in TEXT_DIGITS {
         let end_index = text.len().min(index + text_digit.len());
         if &text[index..end_index] == text_digit {
-            return text_digits_to_u32(text_digit);
+            return text_digits_to_u32(&text_digit);
         }
     }
     None
